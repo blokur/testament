@@ -1,0 +1,27 @@
+language: go
+
+dist: bionic
+
+os:
+  - linux
+
+services:
+  - docker
+
+before_install:
+  - git config --global url."git@github.com:".insteadOf "https://github.com/"
+  - curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(go env GOPATH)/bin v1.27.0
+
+go:
+  - 1.14.x
+
+script:
+  - go fmt ./...
+  - go vet ./...
+  - golangci-lint run ./...
+  - go test --timeout=1m -race -failfast -v ./...
+
+cache:
+  directories:
+    - $HOME/.cache/go-build
+    - $HOME/gopath/pkg/mod
