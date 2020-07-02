@@ -16,6 +16,10 @@ For all your testing needs.
 
 These are common tools we usually use in our tests.
 
++---------------+------------------------------------------------------+
+| AssertInError | Check if an error is found in a deeply nested errors |
++---------------+------------------------------------------------------+
+
 ## Development
 
 ### Prerequisite

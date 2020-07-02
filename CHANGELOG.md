@@ -9,6 +9,7 @@
 ## v0.0.1 - 2020-07-02
 
 ### Added
+- Add AssertInError
 - Add project's development tools
 
 ### Initial
