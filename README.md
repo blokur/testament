@@ -2,6 +2,8 @@
 
 For all your testing needs.
 
+[![Build Status](https://travis-ci.com/blokur/testament.svg?token=TM5LRGpEAwKms8UULFDi&branch=master)](https://travis-ci.com/blokur/testament)
+
 1. [Introduction](#introduction)
 2. [Development](#development)
    - [Prerequisite](#prerequisite)
@@ -16,9 +18,11 @@ For all your testing needs.
 
 These are common tools we usually use in our tests.
 
+```
 +---------------+------------------------------------------------------+
 | AssertInError | Check if an error is found in a deeply nested errors |
 +---------------+------------------------------------------------------+
+```
 
 ## Development
 
