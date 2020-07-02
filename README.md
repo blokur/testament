@@ -4,6 +4,8 @@ For all your testing needs.
 
 [![Build Status](https://travis-ci.com/blokur/testament.svg?token=TM5LRGpEAwKms8UULFDi&branch=master)](https://travis-ci.com/blokur/testament)
 
+![Testament](https://media.giphy.com/media/RScBAu4Y11IME/giphy.gif)
+
 1. [Introduction](#introduction)
 2. [Development](#development)
    - [Prerequisite](#prerequisite)
