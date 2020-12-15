@@ -5,31 +5,14 @@ run="."
 dir="./..."
 short="-short"
 tag="v0.0.1"
+timeout=40s
 
 
 .PHONY: unittest
-unittest: ## Run unit tests.
-	@echo "running tests on $(run)."
-	@go test --timeout=30s --failfast $(short) $(dir) -run $(run)
-
-
-.PHONY: unittest_watch
-unittest_watch: ## Run unit tests in watch mode.
+unittest: ## Run unit tests in watch mode. You can set: [run, timeout, short, dir, flags]. Example: make unittest flags="-race".
 	@echo "running tests on $(run). waiting for changes..."
-	@-zsh -c "go test --timeout=30s $(short) $(dir) -run $(run); repeat 100 printf '#'; echo"
-	@reflex -d none -r "(\.go$$)|(go.mod)" -- zsh -c "go test --timeout=30s --failfast $(short) $(dir) -run $(run); repeat 100 printf '#'"
-
-
-.PHONY: unittest_race
-unittest_race: ## Run unit tests with race flag.
-	@echo "running tests on $(run)."
-	@go test --timeout=30s $(short) $(dir) -run $(run)
-
-.PHONY: unittest_race_watch
-unittest_race_watch: ## Run unit test with race flag in watch mode.
-	@echo "running tests on $(run) with race flag. waiting for changes..."
-	@-zsh -c "go test --timeout=30s --failfast $(short) $(dir) -race -run $(run); repeat 100 printf '#'; echo"
-	@reflex -d none -r "(\.go$$)|(go.mod)" -- zsh -c "go test --timeout=30s --failfast $(short) $(dir) -race -run $(run); repeat 100 printf '#'"
+	@-zsh -c "go test -trimpath --timeout=$(timeout) $(short) $(dir) -run $(run) $(flags); repeat 100 printf '#'; echo"
+	@reflex -d none -r "(\.go$$)|(go.mod)" -- zsh -c "go test -trimpath --timeout=$(timeout) $(short) $(dir) -run $(run) $(flags); repeat 100 printf '#'"
 
 
 .PHONY: dependencies
@@ -38,9 +21,16 @@ dependencies: ## Install dependencies requried for development operations.
 	@go get -u github.com/git-chglog/git-chglog/cmd/git-chglog
 	@go get github.com/stretchr/testify/mock
 	@go get github.com/vektra/mockery/.../
-	@go get github.com/golangci/golangci-lint/cmd/golangci-lint@v1.27.0
+	@go get github.com/golangci/golangci-lint/cmd/golangci-lint@v1.33.0
 	@go mod tidy
 
+
+.PHONY: ci_tests
+ci_tests: ## Run tests for CI.
+	go fmt ./...
+	go vet ./...
+	golangci-lint run ./...
+	go test -trimpath --timeout=10m -failfast -v -race -covermode=atomic -coverprofile=coverage.out ./...
 
 .PHONY: changelog
 changelog: ## Update the changelog.
@@ -63,3 +53,10 @@ clean: ## Clean test caches and tidy up modules.
 .PHONY: mocks
 mocks: ## Generate mocks in all packages.
 	@go generate ./...
+
+
+.PHONY: coverage
+coverage: ## Show the test coverage on browser.
+	go test -covermode=count -coverprofile=coverage.out ./...
+	go tool cover -func=coverage.out | tail -n 1
+	go tool cover -html=coverage.out
