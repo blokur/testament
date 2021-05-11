@@ -8,6 +8,8 @@ import (
 	"github.com/hashicorp/go-multierror"
 	"github.com/pkg/errors"
 	"github.com/stretchr/testify/assert"
+	"google.golang.org/grpc/codes"
+	"google.golang.org/grpc/status"
 )
 
 func init() {
@@ -57,4 +59,19 @@ func RandomString(count int) string {
 		b[i] = runes[rand.Intn(len(runes))]
 	}
 	return string(b)
+}
+
+// AssertIsCode is a helper to assert the err error contains the code.
+func AssertIsCode(t *testing.T, err error, code codes.Code) bool {
+	t.Helper()
+	if !assert.Error(t, err, "empty error") {
+		return false
+	}
+	st := status.Convert(err)
+	if !assert.NotNil(t, st, "empty status") {
+		return false
+	}
+	return assert.EqualValuesf(t, code, st.Code(),
+		"got %q code, want %q. error: %#v", st.Code(), code, err,
+	)
 }

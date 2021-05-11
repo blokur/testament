@@ -8,6 +8,8 @@ import (
 	"github.com/hashicorp/go-multierror"
 	"github.com/pkg/errors"
 	"github.com/stretchr/testify/assert"
+	"google.golang.org/grpc/codes"
+	"google.golang.org/grpc/status"
 )
 
 func TestAssertInError(t *testing.T) {
@@ -124,4 +126,16 @@ func TestRandomString(t *testing.T) {
 	assert.NotEqual(t, s1, s2)
 	s2 = testament.RandomString(20)
 	assert.Len(t, s2, 20)
+}
+
+func TestAssertIsCode(t *testing.T) {
+	for i := 1; i < 17; i++ {
+		tc := codes.Code(i)
+		name := tc.String()
+		t.Run(name, func(t *testing.T) {
+			err := status.New(tc, assert.AnError.Error())
+			got := testament.AssertIsCode(t, err.Err(), tc)
+			assert.True(t, got)
+		})
+	}
 }
