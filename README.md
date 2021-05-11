@@ -12,18 +12,16 @@ For all your testing needs.
    - [Running Tests](#running-tests)
    - [Make Examples](#make-examples)
    - [Changelog](#changelog)
-   - [Mocks](#mocks)
-3. [References](#references)
-
 
 ## Introduction
 
 These are common tools we usually use in our tests.
 
 ```
-+---------------+------------------------------------------------------+
-| AssertInError | Check if an error is found in a deeply nested errors |
-+---------------+------------------------------------------------------+
++----------------+------------------------------------------------------+
+| AssertInError | Check if an error is found in a deeply nested errors  |
+| RandomString  | Generates a randomly generated string by given length |
++----------------+------------------------------------------------------+
 ```
 
 ## Development
@@ -43,12 +41,12 @@ This also installs [reflex][reflex] to help with development process.
 
 ### Running Tests
 
-To watch for file changes and run unittest:
+To watch for file changes and run unit_test:
 
 ```bash
-make unittest_watch
+make unit_test_watch
 # or to run them with race flag:
-make unittest_race_watch
+make unit_test_race_watch
 ```
 
 There is also a `integration_test` target for running integration tests.
@@ -57,10 +55,10 @@ There is also a `integration_test` target for running integration tests.
 
 ```bash
 make                           # shows help on targets.
-make unittest
-make unittest run=TestMyTest   # runs a specific test with regexp.
-make unittest dir=./path/...   # runs tests in a package.
-make unittest dir=./path/... run=TestSomethingElse
+make unit_test
+make unit_test run=TestMyTest   # runs a specific test with regexp.
+make unit_test dir=./path/...   # runs tests in a package.
+make unit_test dir=./path/... run=TestSomethingElse
 ```
 
 Please see the Makefile for more targets.
@@ -80,15 +78,5 @@ target and pass in the next tag:
 ```bash
 make changelog_release tag=v1.0.1
 ```
-
-### Mocks
-
-To generate mocks run:
-
-```bash
-make mocks
-```
-
-## References
 
 [reflex]: https://github.com/cespare/reflex

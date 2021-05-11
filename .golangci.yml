@@ -1,6 +1,5 @@
 linters-settings:
     govet:
-      check-shadowing: true
       settings:
         printf:
           funcs:
@@ -8,8 +7,8 @@ linters-settings:
             - (github.com/golangci/golangci-lint/pkg/logutils.Log).Warnf
             - (github.com/golangci/golangci-lint/pkg/logutils.Log).Errorf
             - (github.com/golangci/golangci-lint/pkg/logutils.Log).Fatalf
-    golint:
-      min-confidence: 0
+      enable:
+        - fieldalignment
     gocyclo:
       min-complexity: 15
     maligned:
@@ -17,14 +16,6 @@ linters-settings:
     goconst:
       min-len: 2
       min-occurrences: 2
-    depguard:
-      list-type: blacklist
-      packages:
-        # logging is allowed only by logutils.Log, logrus
-        # is allowed to use only in logutils package
-        - github.com/sirupsen/logrus
-      packages-with-error-messages:
-        github.com/sirupsen/logrus: "logging is allowed only by logutils.Log"
     misspell:
       locale: UK
     lll:
@@ -38,13 +29,13 @@ linters-settings:
         - opinionated
         - performance
         - style
-      disabled-checks:
-        - wrapperFunc
-        - dupImport # https://github.com/go-critic/go-critic/issues/845
     funlen:
       lines: 100
       statements: 50
-
+    godot:
+      capital: true
+    unparam:
+      check-exported: true
 
 issues:
   # Excluding configuration per-path, per-linter, per-text and per-source
@@ -53,6 +44,12 @@ issues:
       linters:
         - gosec # security check is not impoerant in tests
         - dupl  # we usualy duplicate code in tests
+        - bodyclose
+        - unparam
+        - errcheck
+        - govet
+  fix: true
+  exclude-use-default: false
 
 run:
   skip-dirs:
@@ -69,35 +66,44 @@ linters:
   disable-all: true
   fast: true
   enable:
-    - prealloc
-    - gosimple
-    - staticcheck
-    - unused
-    - gocritic
-    - unparam
-    - interfacer
-    - unconvert
-    - nakedret
-    - maligned
+    - asciicheck
     - bodyclose
+    - deadcode
+    - depguard
     - dogsled
     - dupl
+    - errcheck
+    - errorlint
+    - exportloopref
     - gocognit
     - goconst
+    - gocritic
     - gocyclo
+    - godot
     - godox
+    - golint
     - goprintffuncname
     - gosec
-    - scopelint
-    - rowserrcheck
-    - stylecheck
-    - whitespace
-    - godot
+    - gosimple
+    - govet
     - misspell
+    - nakedret
+    - nestif
+    - prealloc
+    - rowserrcheck
+    - scopelint
+    - staticcheck
+    - stylecheck
+    - tparallel
+    - unconvert
+    - unparam
+    - unused
+    - whitespace
+    - wrapcheck
 
 # golangci.com configuration
 # https://github.com/golangci/golangci/wiki/Configuration
 service:
-  golangci-lint-version: 1.33.x
+  golangci-lint-version: 1.38.x
   prepare:
     - echo "here I can run custom commands, but no preparation needed for this repo"

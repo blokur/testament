@@ -8,28 +8,33 @@ tag="v0.0.1"
 timeout=40s
 
 
-.PHONY: unittest
-unittest: ## Run unit tests in watch mode. You can set: [run, timeout, short, dir, flags]. Example: make unittest flags="-race".
-	@echo "running tests on $(run). waiting for changes..."
-	@-zsh -c "go test -trimpath --timeout=$(timeout) $(short) $(dir) -run $(run) $(flags); repeat 100 printf '#'; echo"
-	@reflex -d none -r "(\.go$$)|(go.mod)" -- zsh -c "go test -trimpath --timeout=$(timeout) $(short) $(dir) -run $(run) $(flags); repeat 100 printf '#'"
+.PHONY: unit_test
+unit_test: ## Run unit tests. You can set: [run, timeout, short, dir, flags]. Example: make unit_test flags="-race".
+	@go mod tidy; go test -trimpath --timeout=$(timeout) $(short) $(dir) -run $(run) $(flags)
 
+.PHONY: unit_test_watch
+unit_test_watch: ## Run unit tests in watch mode. You can set: [run, timeout, short, dir, flags]. Example: make unit_test flags="-race".
+	@echo "running tests on $(run). waiting for changes..."
+	@-zsh -c "go mod tidy; go test -trimpath --timeout=$(timeout) $(short) $(dir) -run $(run) $(flags); repeat 100 printf '#'; echo"
+	@reflex -d none -r "(\.go$$)|(go.mod)" -- zsh -c "go mod tidy; go test -trimpath --timeout=$(timeout) $(short) $(dir) -run $(run) $(flags); repeat 100 printf '#'"
 
 .PHONY: dependencies
 dependencies: ## Install dependencies requried for development operations.
-	@go get -u github.com/cespare/reflex
-	@go get -u github.com/git-chglog/git-chglog/cmd/git-chglog
-	@go get github.com/stretchr/testify/mock
-	@go get github.com/vektra/mockery/.../
-	@go get github.com/golangci/golangci-lint/cmd/golangci-lint@v1.33.0
+	@go install github.com/cespare/reflex@latest
+	@go install github.com/git-chglog/git-chglog/cmd/git-chglog@latest
+	@go install github.com/golangci/golangci-lint/cmd/golangci-lint@v1.38.0
+	@go get -u ./...
 	@go mod tidy
+
+.PHONY: lint
+lint: ## Lint the code
+	go fmt ./...
+	go vet ./...
+	golangci-lint run ./...
 
 
 .PHONY: ci_tests
 ci_tests: ## Run tests for CI.
-	go fmt ./...
-	go vet ./...
-	golangci-lint run ./...
 	go test -trimpath --timeout=10m -failfast -v -race -covermode=atomic -coverprofile=coverage.out ./...
 
 .PHONY: changelog
