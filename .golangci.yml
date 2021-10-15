@@ -83,7 +83,6 @@ linters:
     - godot
     - godox
     - goprintffuncname
-    - gosec
     - gosimple
     - govet
     - ineffassign

@@ -119,17 +119,6 @@ func TestAssertInError(t *testing.T) {
 	}
 }
 
-func TestRandomString(t *testing.T) {
-	t.Parallel()
-	s1 := testament.RandomString(10)
-	assert.Len(t, s1, 10)
-	s2 := testament.RandomString(10)
-	assert.Len(t, s2, 10)
-	assert.NotEqual(t, s1, s2)
-	s2 = testament.RandomString(20)
-	assert.Len(t, s2, 20)
-}
-
 func TestAssertIsCode(t *testing.T) {
 	for i := 1; i < 17; i++ {
 		tc := codes.Code(i)

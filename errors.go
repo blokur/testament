@@ -54,17 +54,6 @@ func AssertInError(t *testing.T, haystack, needle error) bool {
 	return contains()
 }
 
-// RandomString returns a randomly generated string with the length of count.
-func RandomString(count int) string {
-	const runes = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
-	b := make([]byte, count)
-	for i := range b {
-		// nolint:gosec // it is supposed to be used in tests.
-		b[i] = runes[rand.Intn(len(runes))]
-	}
-	return string(b)
-}
-
 // AssertIsCode is a helper to assert the err error contains the code.
 func AssertIsCode(t *testing.T, err error, code codes.Code) bool {
 	t.Helper()
