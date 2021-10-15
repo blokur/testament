@@ -28,35 +28,13 @@ jobs:
       with:
         go-version: 1.17
 
-    - name: Configure AWS Credentials
-      uses: aws-actions/configure-aws-credentials@v1
-      with:
-        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        aws-region: eu-west-1
-
-    - name: Install AWS CLI
-      run: pip install --user awscli
-
     - name: Install Golangci
       run: curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(go env GOPATH)/bin v1.42.1
 
-    - name: Login To AWS
-      run: eval $(aws ecr get-login --no-include-email --region eu-west-1)
-
-    - name: Granting Private Modules Access
-      env:
-        GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
-        GITHUB_USER: bkrps
-        GOPRIVATE: github.com/blokur
-      run: git config --global url."https://${GITHUB_USER}:${GITHUB_TOKEN}@github.com".insteadOf "https://github.com"
 
     - uses: satackey/action-docker-layer-caching@v0.0.11
       # Ignore the failure of a step and avoid terminating the job.
       continue-on-error: true
-
-    - name: Install Dependencies
-      run: make integration_deps
 
     - name: Linting Code
       run: make lint

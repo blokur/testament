@@ -5,7 +5,7 @@ import (
 	"strings"
 )
 
-// RandomString returns a randomly generated string with the length of count.
+// RandomString returns a randomly generates string with the length of count.
 func RandomString(count int) string {
 	const runes = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
 	b := make([]byte, count)
@@ -15,12 +15,11 @@ func RandomString(count int) string {
 	return string(b)
 }
 
-// RandomLowerString returns a randomly generated lowercased string with the
+// RandomLowerString returns a randomly generates lower-cased string with the
 // length of count.
 func RandomLowerString(count int) string {
 	return strings.ToLower(RandomString(count))
 }
-
 
 // StringSlice return a string slice with the provided length.
 func StringSlice(n int) []string {
@@ -31,7 +30,7 @@ func StringSlice(n int) []string {
 	return ret
 }
 
-// RandomStringSlice return a random string slice with maximum length max.
+// RandomStringSlice return a random string slice with maximum length of max.
 func RandomStringSlice(max int) []string {
 	ret := make([]string, rand.Intn(max))
 	for i := range ret {
