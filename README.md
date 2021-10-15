@@ -28,7 +28,7 @@ These are common tools we usually use in our tests.
 
 ### Prerequisite
 
-This project supports Go > `1.14`. To run targets from the `Makefile` you need
+This project supports Go >= `1.17`. To run targets from the `Makefile` you need
 to install GNU make.
 
 In order to install dependencies:

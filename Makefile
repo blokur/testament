@@ -22,7 +22,7 @@ unit_test_watch: ## Run unit tests in watch mode. You can set: [run, timeout, sh
 dependencies: ## Install dependencies requried for development operations.
 	@go install github.com/cespare/reflex@latest
 	@go install github.com/git-chglog/git-chglog/cmd/git-chglog@latest
-	@go install github.com/golangci/golangci-lint/cmd/golangci-lint@v1.38.0
+	@go install github.com/golangci/golangci-lint/cmd/golangci-lint@v1.42.1
 	@go get -u ./...
 	@go mod tidy
 

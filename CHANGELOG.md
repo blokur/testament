@@ -5,6 +5,15 @@
 
 
 
+<a name="v0.1.0"></a>
+## [v0.1.0] - 2021-05-11
+
+### Added
+- Add GetFreeOpenPort/GetFreePort
+- Add AssertIsCode
+- Add RandomString function
+
+
 <a name="v0.0.2"></a>
 ## [v0.0.2] - 2020-12-15
 
@@ -28,5 +37,6 @@
 
 
 
-[Unreleased]: https://github.com/blokur/testify/compare/v0.0.2...HEAD
+[Unreleased]: https://github.com/blokur/testify/compare/v0.1.0...HEAD
+[v0.1.0]: https://github.com/blokur/testify/compare/v0.0.2...v0.1.0
 [v0.0.2]: https://github.com/blokur/testify/compare/v0.0.1...v0.0.2

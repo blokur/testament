@@ -10,12 +10,10 @@ services:
 
 before_install:
   - git config --global url."git@github.com:".insteadOf "https://github.com/"
-  - curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(go env GOPATH)/bin v1.38.0
+  - curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(go env GOPATH)/bin v1.42.1
 
 go:
-  - 1.14.x
-  - 1.15.x
-  - 1.16.x
+  - 1.17.x
 
 script:
   - make lint
