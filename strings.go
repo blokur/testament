@@ -1,6 +1,7 @@
 package testament
 
 import (
+	"fmt"
 	"math/rand"
 	"strings"
 )
@@ -37,4 +38,9 @@ func RandomStringSlice(max int) []string {
 		ret[i] = RandomString(20)
 	}
 	return ret
+}
+
+// RandomEmailAddress returns a random email address.
+func RandomEmailAddress() string {
+	return fmt.Sprintf("%s@%s.%s", RandomLowerString(10) , RandomLowerString(10) , RandomLowerString(3))
 }

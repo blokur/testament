@@ -36,6 +36,7 @@ These are common tools we usually use in our tests.
 | IntSliceComparer   | Is a go-cmp comparer that doesn't care if the slices are not sorted.   |
 | Int32SliceComparer |                                                                        |
 | Int64SliceComparer |                                                                        |
+| RandomEmailAddress | Returns a valid random email address.                                  |
 
 ## Development
 

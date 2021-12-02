@@ -1,6 +1,7 @@
 package testament_test
 
 import (
+	"regexp"
 	"strings"
 	"testing"
 	"testing/quick"
@@ -15,6 +16,7 @@ func TestString(t *testing.T) {
 	t.Run("RandomLowerString", testStringRandomLowerString)
 	t.Run("StringSlice", testStringStringSlice)
 	t.Run("RandomStringSlice", testStringRandomStringSlice)
+	t.Run("RandomEmailAddress", testStringRandomEmailAddress)
 }
 
 func testStringRandomString(t *testing.T) {
@@ -69,5 +71,20 @@ func testStringRandomStringSlice(t *testing.T) {
 	}
 	if err := quick.Check(f, nil); err != nil {
 		t.Error(err)
+	}
+}
+
+var validEmail = regexp.MustCompile(`^[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,4}$`)
+
+func isValidEmail(email string) bool {
+	return validEmail.MatchString(email)
+}
+
+func testStringRandomEmailAddress(t *testing.T) {
+	t.Parallel()
+	total := 100
+	for i := 0; i < total; i++ {
+		got := testament.RandomEmailAddress()
+		assert.True(t, isValidEmail(got))
 	}
 }
