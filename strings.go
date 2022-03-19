@@ -42,5 +42,5 @@ func RandomStringSlice(max int) []string {
 
 // RandomEmailAddress returns a random email address.
 func RandomEmailAddress() string {
-	return fmt.Sprintf("%s@%s.%s", RandomLowerString(10) , RandomLowerString(10) , RandomLowerString(3))
+	return fmt.Sprintf("%s@%s.%s", RandomLowerString(10), RandomLowerString(10), RandomLowerString(3))
 }
