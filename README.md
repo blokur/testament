@@ -11,14 +11,13 @@ For all your testing needs.
    - [Prerequisite](#prerequisite)
    - [Running Tests](#running-tests)
    - [Make Examples](#make-examples)
-   - [Changelog](#changelog)
 
 ## Introduction
 
 These are common tools we usually use in our tests.
 
 | Function           | Description                                                            |
-| :---               | :---                                                                   |
+| :----------------- | :--------------------------------------------------------------------- |
 | AssertInError      | Check if an error is found in a deeply nested errors                   |
 | RandomString       | Generates a randomly generated string by given length                  |
 | GetFreeOpenPort    | Returns a port that is already claimed.                                |
@@ -76,21 +75,5 @@ make unit_test dir=./path/... run=TestSomethingElse
 ```
 
 Please see the Makefile for more targets.
-
-### Changelog
-
-You need to update the changelogs file before each release. In order to update
-the changelogs file run the following:
-
-```bash
-make changelog
-```
-
-When you are ready to make a commitment and tag the next release, use this
-target and pass in the next tag:
-
-```bash
-make changelog_release tag=v1.0.1
-```
 
 [reflex]: https://github.com/cespare/reflex

@@ -4,9 +4,7 @@ help: ## Show help messages.
 run="."
 dir="./..."
 short="-short"
-tag="v0.0.1"
 timeout=40s
-
 
 .PHONY: unit_test
 unit_test: ## Run unit tests. You can set: [run, timeout, short, dir, flags]. Example: make unit_test flags="-race".
@@ -21,7 +19,6 @@ unit_test_watch: ## Run unit tests in watch mode. You can set: [run, timeout, sh
 .PHONY: dependencies
 dependencies: ## Install dependencies requried for development operations.
 	@go install github.com/cespare/reflex@latest
-	@go install github.com/git-chglog/git-chglog/cmd/git-chglog@latest
 	@go install github.com/golangci/golangci-lint/cmd/golangci-lint@v1.42.1
 	@go get -u ./...
 	@go mod tidy
@@ -32,33 +29,18 @@ lint: ## Lint the code
 	go vet ./...
 	golangci-lint run ./...
 
-
 .PHONY: ci_tests
 ci_tests: ## Run tests for CI.
 	go test -trimpath --timeout=10m -failfast -v -race -covermode=atomic -coverprofile=coverage.out ./...
-
-.PHONY: changelog
-changelog: ## Update the changelog.
-	@git-chglog > CHANGELOG.md
-	@echo "Changelog has been updated."
-
-
-.PHONY: changelog_release
-changelog_release: ## Update the changelog with a release tag.
-	@git-chglog --next-tag $(tag) > CHANGELOG.md
-	@echo "Changelog has been updated."
-
 
 .PHONY: clean
 clean: ## Clean test caches and tidy up modules.
 	@go clean -testcache
 	@go mod tidy
 
-
 .PHONY: mocks
 mocks: ## Generate mocks in all packages.
 	@go generate ./...
-
 
 .PHONY: coverage
 coverage: ## Show the test coverage on browser.
