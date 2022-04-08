@@ -14,8 +14,20 @@ on:
       - feature/*
       - bugfix/*
       - refactor/*
+      - chore/*
 
 jobs:
+  label:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+
+    steps:
+      - uses: actions/labeler@v3
+        with:
+          repo-token: "${{ secrets.GITHUB_TOKEN }}"
+
   test:
     runs-on: ubuntu-latest
     strategy:

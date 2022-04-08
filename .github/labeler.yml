@@ -1,0 +1,23 @@
+comparers:
+  - comparers.go
+  - comparers_test.go
+
+slices:
+  - slices.go
+  - slices_test.go
+
+strings:
+  - strings.go
+  - strings_test.go
+
+errors:
+  - errors.go
+  - errors_test.go
+
+documentation:
+  - README.md
+
+ci:
+  - .github/*
+  - .github/**/*
+  - .golangci.yml
