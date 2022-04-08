@@ -15,6 +15,7 @@ func TestComparer(t *testing.T) {
 	t.Run("IntSliceComparer", testComparerIntSliceComparer)
 	t.Run("Int32SliceComparer", testComparerInt32SliceComparer)
 	t.Run("Int64SliceComparer", testComparerInt64SliceComparer)
+	t.Run("StringSliceComparer", testComparerStringSliceComparer)
 }
 
 func testComparerIntSliceComparer(t *testing.T) {
@@ -80,6 +81,29 @@ func testComparerInt64SliceComparer(t *testing.T) {
 			b[i], b[j] = b[j], b[i]
 		})
 		return cmp.Diff(a, b, testament.Int64SliceComparer) == ""
+	}
+	if err := quick.Check(f, nil); err != nil {
+		t.Error(err)
+	}
+}
+
+func testComparerStringSliceComparer(t *testing.T) {
+	t.Parallel()
+	a := testament.RandomStringSlice(20)
+	b := make([]string, len(a))
+	copy(b, a)
+	b = append(b, testament.RandomString(100))
+
+	assert.NotEmpty(t, cmp.Diff(a, b, testament.StringSliceComparer))
+	assert.Empty(t, cmp.Diff(a, a, testament.StringSliceComparer))
+
+	f := func(a []string) bool {
+		b := make([]string, len(a))
+		copy(b, a)
+		rand.Shuffle(len(b), func(i, j int) {
+			b[i], b[j] = b[j], b[i]
+		})
+		return cmp.Diff(a, b, testament.StringSliceComparer) == ""
 	}
 	if err := quick.Check(f, nil); err != nil {
 		t.Error(err)
