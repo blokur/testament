@@ -28,6 +28,11 @@ func testComparerIntSliceComparer(t *testing.T) {
 	assert.NotEmpty(t, cmp.Diff(a, b, testament.IntSliceComparer))
 	assert.Empty(t, cmp.Diff(a, a, testament.IntSliceComparer))
 
+	a = []int{3, 1, 2}
+	b = []int{3, 1, 2}
+	cmp.Diff(a, b, testament.IntSliceComparer)
+	assert.Equal(t, []int{3, 1, 2}, b)
+
 	f := func(a []int) bool {
 		b := make([]int, len(a))
 		copy(b, a)
@@ -50,6 +55,11 @@ func testComparerInt32SliceComparer(t *testing.T) {
 
 	assert.NotEmpty(t, cmp.Diff(a, b, testament.Int32SliceComparer))
 	assert.Empty(t, cmp.Diff(a, a, testament.Int32SliceComparer))
+
+	a = []int32{3, 1, 2}
+	b = []int32{3, 1, 2}
+	cmp.Diff(a, b, testament.IntSliceComparer)
+	assert.Equal(t, []int32{3, 1, 2}, b)
 
 	f := func(a []int32) bool {
 		b := make([]int32, len(a))
@@ -74,6 +84,11 @@ func testComparerInt64SliceComparer(t *testing.T) {
 	assert.NotEmpty(t, cmp.Diff(a, b, testament.Int64SliceComparer))
 	assert.Empty(t, cmp.Diff(a, a, testament.Int64SliceComparer))
 
+	a = []int64{3, 1, 2}
+	b = []int64{3, 1, 2}
+	cmp.Diff(a, b, testament.IntSliceComparer)
+	assert.Equal(t, []int64{3, 1, 2}, b)
+
 	f := func(a []int64) bool {
 		b := make([]int64, len(a))
 		copy(b, a)
@@ -96,6 +111,11 @@ func testComparerStringSliceComparer(t *testing.T) {
 
 	assert.NotEmpty(t, cmp.Diff(a, b, testament.StringSliceComparer))
 	assert.Empty(t, cmp.Diff(a, a, testament.StringSliceComparer))
+
+	a = []string{"d", "a", "b"}
+	b = []string{"d", "a", "b"}
+	cmp.Diff(a, b, testament.IntSliceComparer)
+	assert.Equal(t, []string{"d", "a", "b"}, b)
 
 	f := func(a []string) bool {
 		b := make([]string, len(a))
