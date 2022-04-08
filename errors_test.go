@@ -47,26 +47,32 @@ func TestAssertInError(t *testing.T) {
 		"in wrapped message": {err1, errors.Wrap(err2, err1.Error()), assert.True},
 		"stl true":           {err1, err1STL, assert.True},
 
-		"stl false": {err1,
+		"stl false": {
+			err1,
 			fmt.Errorf("%s %w %s", testament.RandomString(40), err2, testament.RandomString(40)),
 			assert.False,
 		},
 
-		"in stl message": {err1,
+		"in stl message": {
+			err1,
 			fmt.Errorf("%s %w %s", testament.RandomString(40), err2, err1.Error()),
-			assert.True},
+			assert.True,
+		},
 
-		"stl(stl)": {err1,
+		"stl(stl)": {
+			err1,
 			fmt.Errorf("%s %w %s", testament.RandomString(40), err1STL, testament.RandomString(40)),
 			assert.True,
 		},
 
-		"wrap(stl)": {err1,
+		"wrap(stl)": {
+			err1,
 			errors.Wrap(err1STL, testament.RandomString(40)),
 			assert.True,
 		},
 
-		"stl(wrap)": {err1,
+		"stl(wrap)": {
+			err1,
 			fmt.Errorf("%s %w %s", testament.RandomString(40), errors.Wrap(err1, testament.RandomString(40)), testament.RandomString(40)),
 			assert.True,
 		},
@@ -77,32 +83,38 @@ func TestAssertInError(t *testing.T) {
 		"wrap(multi)": {err1, errors.Wrap(mutiWrap(err2, err1, err3), msg3), assert.True},
 		"stl(multi)":  {err1, fmt.Errorf("%s %w %s", msg2, mutiWrap(err2, err1, err3), msg3), assert.True},
 
-		"stl(multi(wrap))": {err1,
+		"stl(multi(wrap))": {
+			err1,
 			fmt.Errorf("%s %w %s", msg2, mutiWrap(err2, errors.Wrap(err1, testament.RandomString(100)), err3), msg3),
 			assert.True,
 		},
 
-		"stl(wrap(multi))": {err1,
+		"stl(wrap(multi))": {
+			err1,
 			fmt.Errorf("%s %w %s", msg2, errors.Wrap(mutiWrap(err2, err1, err3), testament.RandomString(100)), msg3),
 			assert.True,
 		},
 
-		"multi(stl(wrap))": {err1,
+		"multi(stl(wrap))": {
+			err1,
 			mutiWrap(err2, fmt.Errorf("%s %w %s", msg2, errors.Wrap(err1, testament.RandomString(100)), err3)),
 			assert.True,
 		},
 
-		"multi(wrap(stl))": {err1,
+		"multi(wrap(stl))": {
+			err1,
 			mutiWrap(err2, errors.Wrap(fmt.Errorf("%s %w %s", msg2, err1, err3), testament.RandomString(100))),
 			assert.True,
 		},
 
-		"wrap(multi(stl))": {err1,
+		"wrap(multi(stl))": {
+			err1,
 			errors.Wrap(mutiWrap(err2, fmt.Errorf("%s %w %s", msg2, err1, err3)), testament.RandomString(100)),
 			assert.True,
 		},
 
-		"wrap(stl(multi))": {err1,
+		"wrap(stl(multi))": {
+			err1,
 			errors.Wrap(fmt.Errorf("%s %w %s", msg2, mutiWrap(err2, err1, err3), testament.RandomString(100)), testament.RandomString(100)),
 			assert.True,
 		},

@@ -19,8 +19,8 @@ unit_test_watch: ## Run unit tests in watch mode. You can set: [run, timeout, sh
 .PHONY: dependencies
 dependencies: ## Install dependencies requried for development operations.
 	@go install github.com/cespare/reflex@latest
-	@go install github.com/golangci/golangci-lint/cmd/golangci-lint@v1.45.0
-	@go get -u ./...
+	@go install github.com/golangci/golangci-lint/cmd/golangci-lint@v1.45.2
+	@go get -u -d ./...
 	@go mod tidy
 
 .PHONY: lint
