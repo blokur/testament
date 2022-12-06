@@ -2,14 +2,12 @@ package testament_test
 
 import (
 	"fmt"
-	"net"
 	"testing"
 
 	"github.com/blokur/testament"
 	"github.com/hashicorp/go-multierror"
 	"github.com/pkg/errors"
 	"github.com/stretchr/testify/assert"
-	"github.com/stretchr/testify/require"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 )
@@ -145,23 +143,4 @@ func TestAssertIsCode(t *testing.T) {
 			assert.True(t, got)
 		})
 	}
-}
-
-func TestGetFreeOpenPort(t *testing.T) {
-	t.Parallel()
-	p, l := testament.GetFreeOpenPort(t)
-	require.NotNil(t, l)
-	defer l.Close() //nolint // not important in testing.
-
-	_, err := net.Listen("tcp", fmt.Sprintf(":%d", p))
-	require.Error(t, err)
-}
-
-func TestGetFreePort(t *testing.T) {
-	t.Parallel()
-	p := testament.GetFreePort(t)
-
-	l, err := net.Listen("tcp", fmt.Sprintf(":%d", p))
-	require.NoError(t, err)
-	l.Close() //nolint // not important in testing.
 }
