@@ -1,11 +1,19 @@
 // Package testament provides convinience tools in testing.
 //
-// AssertInError
+// Error Helper
 //
-// If you have a deeply nested error you want to check whether a particular
-// error is in the haystack you can call this function. It will upwrap
-// everything made from any of or any combination of fmt.Errorf,
-// hashicorp/go-multierror, and pkg/errors helpers. It will fallback to the
-// string representation of the error being in the haystack string
-// representation.
+// The error specific functions are helpers for checking nested errors, or gRPC
+// specific codes.
+//
+// Network Helpers
+//
+// These helpers can acquire random free network port.
+//
+// Randomise Helpers
+//
+// There are some useful helpers for creating random strings, slices, etc.
+//
+// Comparer Helpers
+//
+// These helpers are useful to be used with the google's cmp package.
 package testament
