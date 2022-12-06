@@ -1,14 +1,14 @@
 module github.com/blokur/testament
 
-go 1.18
+go 1.19
 
 require (
-	github.com/google/go-cmp v0.5.7
+	github.com/google/go-cmp v0.5.9
 	github.com/hashicorp/go-multierror v1.1.1
 	github.com/pkg/errors v0.9.1
-	github.com/stretchr/testify v1.7.1
-	golang.org/x/exp v0.0.0-20220407100705-7b9b53b0aca4
-	google.golang.org/grpc v1.45.0
+	github.com/stretchr/testify v1.8.1
+	golang.org/x/exp v0.0.0-20221205204356-47842c84f3db
+	google.golang.org/grpc v1.51.0
 )
 
 require (
@@ -17,10 +17,9 @@ require (
 	github.com/hashicorp/errwrap v1.1.0 // indirect
 	github.com/kr/pretty v0.3.0 // indirect
 	github.com/pmezard/go-difflib v1.0.0 // indirect
-	golang.org/x/sys v0.0.0-20220406163625-3f8b81556e12 // indirect
-	golang.org/x/text v0.3.7 // indirect
-	google.golang.org/genproto v0.0.0-20220407144326-9054f6ed7bac // indirect
-	google.golang.org/protobuf v1.28.0 // indirect
+	golang.org/x/net v0.3.0 // indirect
+	google.golang.org/genproto v0.0.0-20221205194025-8222ab48f5fc // indirect
+	google.golang.org/protobuf v1.28.1 // indirect
 	gopkg.in/check.v1 v1.0.0-20201130134442-10cb98267c6c // indirect
-	gopkg.in/yaml.v3 v3.0.0-20210107192922-496545a6307b // indirect
+	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
