@@ -139,6 +139,10 @@ func TestAssertIsCode(t *testing.T) {
 			err := status.New(tc, assert.AnError.Error())
 			got := testament.AssertIsCode(t, err.Err(), tc)
 			assert.True(t, got)
+
+			wrappedErr := errors.Wrap(status.Error(tc, assert.AnError.Error()), testament.RandomString(10))
+			got = testament.AssertIsCode(t, wrappedErr, tc)
+			assert.True(t, got)
 		})
 	}
 }

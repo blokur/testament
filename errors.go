@@ -60,7 +60,7 @@ func AssertIsCode(t *testing.T, err error, code codes.Code) bool {
 	if !assert.Error(t, err, "empty error") {
 		return false
 	}
-	st := status.Convert(err)
+	st := status.Convert(errors.Cause(err))
 	if !assert.NotNil(t, st, "empty status") {
 		return false
 	}
