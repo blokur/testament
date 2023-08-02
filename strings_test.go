@@ -17,6 +17,7 @@ func TestString(t *testing.T) {
 	t.Run("StringSlice", testStringStringSlice)
 	t.Run("RandomStringSlice", testStringRandomStringSlice)
 	t.Run("RandomEmailAddress", testStringRandomEmailAddress)
+	t.Run("RandomS3Filename", testStringRandomS3Filename)
 }
 
 func testStringRandomString(t *testing.T) {
@@ -86,5 +87,20 @@ func testStringRandomEmailAddress(t *testing.T) {
 	for i := 0; i < total; i++ {
 		got := testament.RandomEmailAddress()
 		assert.True(t, isValidEmail(got))
+	}
+}
+
+var validS3Filename = regexp.MustCompile(`^s3://([a-z0-9.\-]+/)?[a-z0-9.\-]+(\.[a-z0-9]+)?$`)
+
+func isValidS3Filename(filename string) bool {
+	return validS3Filename.MatchString(filename)
+}
+
+func testStringRandomS3Filename(t *testing.T) {
+	t.Parallel()
+	total := 100
+	for i := 0; i < total; i++ {
+		got := testament.RandomS3Filename()
+		assert.True(t, isValidS3Filename(got), got)
 	}
 }

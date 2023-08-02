@@ -44,3 +44,8 @@ func RandomStringSlice(max int) []string {
 func RandomEmailAddress() string {
 	return fmt.Sprintf("%s@%s.%s", RandomLowerString(10), RandomLowerString(10), RandomLowerString(3))
 }
+
+// RandomS3Filename returns a random S3 filename with a subfolder.
+func RandomS3Filename() string {
+	return fmt.Sprintf("s3://%s/%s.%s", RandomLowerString(10), RandomLowerString(10), RandomLowerString(3))
+}
