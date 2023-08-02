@@ -23,6 +23,7 @@ dependencies: ## Install dependencies requried for development operations.
 	@go install github.com/matryer/moq@latest
 	@go install github.com/psampaz/go-mod-outdated@latest
 	@go install github.com/jondot/goweight@latest
+	@go install golang.org/x/vuln/cmd/govulncheck@latest
 	@go get -t -u golang.org/x/tools/cmd/cover
 	@go get -t -u github.com/sonatype-nexus-community/nancy@latest
 	@go get -u -d ./...
@@ -55,6 +56,7 @@ coverage: ## Show the test coverage on browser.
 
 .PHONY: audit
 audit: ## Audit the code for updates, vulnerabilities and binary weight.
+	govulncheck ./...
 	go list -u -m -json all | go-mod-outdated -update -direct
 	go list -json -m all | nancy sleuth
 	goweight | head -n 20

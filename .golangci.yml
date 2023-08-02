@@ -95,6 +95,10 @@ issues:
         - unparam
         - errcheck
         - govet
+        - makezero
+        - errorlint
+        - gocritic
+        - funlen
   fix: true
   exclude-use-default: false
 
@@ -113,34 +117,52 @@ run:
 
 linters:
   enable:
+    - asciicheck
+    - asasalint
     - bidichk
     - bodyclose
+    - containedctx
+    - contextcheck
     - cyclop
-    - deadcode
-    - depguard
+    - decorder
     - dogsled
     - dupl
     - durationcheck
     - errcheck
+    - errchkjson
     - errname
     - errorlint
+    - execinquery
     - exportloopref
+    - forbidigo
     - forcetypeassert
+    - funlen
+    - gocheckcompilerdirectives
     - gocognit
     - goconst
     - gocritic
     - gocyclo
     - godot
+    - godox
     - gofmt
     - gofumpt
+    - goheader
+    - goimports
+    - gomoddirectives
+    - gomodguard
     - goprintffuncname
     - gosimple
     - govet
+    - grouper
+    - importas
     - ineffassign
+    - maintidx
+    - makezero
     - misspell
     - nakedret
     - nestif
     - nilerr
+    - nilnil
     - noctx
     - prealloc
     - predeclared
@@ -149,7 +171,6 @@ linters:
     - rowserrcheck
     - sqlclosecheck
     - staticcheck
-    - structcheck
     - stylecheck
     - tenv
     - tparallel
@@ -157,6 +178,5 @@ linters:
     - unconvert
     - unparam
     - unused
-    - varcheck
     - wastedassign
     - whitespace
