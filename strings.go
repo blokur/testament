@@ -31,9 +31,9 @@ func StringSlice(n int) []string {
 	return ret
 }
 
-// RandomStringSlice return a random string slice with maximum length of max.
-func RandomStringSlice(max int) []string {
-	ret := make([]string, rand.Intn(max))
+// RandomStringSlice return a random string slice with maximum length of to.
+func RandomStringSlice(to int) []string {
+	ret := make([]string, rand.Intn(to))
 	for i := range ret {
 		ret[i] = RandomString(20)
 	}
