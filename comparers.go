@@ -39,9 +39,21 @@ var Int32SliceComparer = cmp.Comparer(func(a, b []int32) bool {
 	return equal(a, b)
 })
 
+// Uint32SliceComparer is a go-cmp comparer that doesn't care if the slices in
+// question is not sorted. The slices are copies and can be safely reused.
+var Uint32SliceComparer = cmp.Comparer(func(a, b []uint32) bool {
+	return equal(a, b)
+})
+
 // Int64SliceComparer is a go-cmp comparer that doesn't care if the slices in
 // question is not sorted. The slices are copies and can be safely reused.
 var Int64SliceComparer = cmp.Comparer(func(a, b []int64) bool {
+	return equal(a, b)
+})
+
+// Uint64SliceComparer is a go-cmp comparer that doesn't care if the slices in
+// question is not sorted. The slices are copies and can be safely reused.
+var Uint64SliceComparer = cmp.Comparer(func(a, b []uint64) bool {
 	return equal(a, b)
 })
 

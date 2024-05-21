@@ -14,7 +14,9 @@ func TestComparer(t *testing.T) {
 	t.Parallel()
 	t.Run("IntSliceComparer", testComparerIntSliceComparer)
 	t.Run("Int32SliceComparer", testComparerInt32SliceComparer)
+	t.Run("Uint32SliceComparer", testComparerUint32SliceComparer)
 	t.Run("Int64SliceComparer", testComparerInt64SliceComparer)
+	// t.Run("Uint64SliceComparer", testComparerUint64SliceComparer)
 	t.Run("StringSliceComparer", testComparerStringSliceComparer)
 }
 
@@ -58,7 +60,7 @@ func testComparerInt32SliceComparer(t *testing.T) {
 
 	a = []int32{3, 1, 2}
 	b = []int32{3, 1, 2}
-	cmp.Diff(a, b, testament.IntSliceComparer)
+	cmp.Diff(a, b, testament.Int32SliceComparer)
 	assert.Equal(t, []int32{3, 1, 2}, b)
 
 	f := func(a []int32) bool {
@@ -68,6 +70,34 @@ func testComparerInt32SliceComparer(t *testing.T) {
 			b[i], b[j] = b[j], b[i]
 		})
 		return cmp.Diff(a, b, testament.Int32SliceComparer) == ""
+	}
+	if err := quick.Check(f, nil); err != nil {
+		t.Error(err)
+	}
+}
+
+func testComparerUint32SliceComparer(t *testing.T) {
+	t.Parallel()
+	a := testament.RandUint32Slice(20)
+	b := make([]uint32, len(a))
+	copy(b, a)
+	b = append(b, uint32(rand.Int31()))
+
+	assert.NotEmpty(t, cmp.Diff(a, b, testament.Uint32SliceComparer))
+	assert.Empty(t, cmp.Diff(a, a, testament.Uint32SliceComparer))
+
+	a = []uint32{3, 1, 2}
+	b = []uint32{3, 1, 2}
+	cmp.Diff(a, b, testament.Uint32SliceComparer)
+	assert.Equal(t, []uint32{3, 1, 2}, b)
+
+	f := func(a []uint32) bool {
+		b := make([]uint32, len(a))
+		copy(b, a)
+		rand.Shuffle(len(b), func(i, j int) {
+			b[i], b[j] = b[j], b[i]
+		})
+		return cmp.Diff(a, b, testament.Uint32SliceComparer) == ""
 	}
 	if err := quick.Check(f, nil); err != nil {
 		t.Error(err)
