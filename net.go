@@ -13,7 +13,7 @@ import (
 // listener on test cleanup.
 func GetFreeOpenPort(t *testing.T) (uint, net.Listener) {
 	t.Helper()
-	l, err := net.Listen("tcp", ":0")
+	l, err := net.Listen("tcp", ":0") //nolint:noctx // test helper; no context available
 	require.NoError(t, err, "could not open a port")
 	addr := l.Addr().String()
 	parts := strings.Split(addr, ":")

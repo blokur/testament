@@ -1,23 +1,35 @@
 comparers:
-  - comparers.go
-  - comparers_test.go
+  - changed-files:
+      - any-glob-to-any-file:
+          - comparers.go
+          - comparers_test.go
 
 slices:
-  - slices.go
-  - slices_test.go
+  - changed-files:
+      - any-glob-to-any-file:
+          - slices.go
+          - slices_test.go
 
 strings:
-  - strings.go
-  - strings_test.go
+  - changed-files:
+      - any-glob-to-any-file:
+          - strings.go
+          - strings_test.go
 
 errors:
-  - errors.go
-  - errors_test.go
+  - changed-files:
+      - any-glob-to-any-file:
+          - errors.go
+          - errors_test.go
 
 documentation:
-  - README.md
+  - changed-files:
+      - any-glob-to-any-file:
+          - README.md
 
 ci:
-  - .github/*
-  - .github/**/*
-  - .golangci.yml
+  - changed-files:
+      - any-glob-to-any-file:
+          - .github/*
+          - .github/**/*
+          - .golangci.yml
