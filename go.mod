@@ -8,7 +8,7 @@ require (
 	github.com/pkg/errors v0.9.1
 	github.com/stretchr/testify v1.11.1
 	golang.org/x/exp v0.0.0-20260529124908-c761662dc8c9
-	google.golang.org/grpc v1.81.1
+	google.golang.org/grpc v1.83.1
 )
 
 require (
