@@ -119,7 +119,6 @@ func TestAssertInError(t *testing.T) {
 	}
 
 	for name, tc := range tcs {
-		tc := tc
 		t.Run(name, func(t *testing.T) {
 			t.Parallel()
 			noT := &testing.T{}

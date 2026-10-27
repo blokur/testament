@@ -3,14 +3,14 @@ name: Continues Integration
 on:
   push:
     branches:
-      - master
+      - main
       - feature/*
       - bugfix/*
     tags:
       - "*"
   pull_request:
     branches:
-      - master
+      - main
       - feature/*
       - bugfix/*
       - refactor/*
@@ -24,33 +24,20 @@ jobs:
       pull-requests: write
 
     steps:
-      - uses: actions/labeler@v6
+      - uses: actions/labeler@v7
         with:
           repo-token: "${{ secrets.GITHUB_TOKEN }}"
 
   test:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        go: ["1.26.4"]
-
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
 
-      - name: Set up Go ${{ matrix.go }}
-        uses: actions/setup-go@v6
+      - name: Set up Go
+        uses: actions/setup-go@v7
         with:
-          go-version: ${{ matrix.go }}
-
-      - uses: actions/cache@v5
-        with:
-          path: |
-            ~/.cache/go-build
-            ~/go/pkg/mod
-          key: ${{ runner.os }}-go-${{ matrix.go }}-${{ hashFiles('**/go.sum') }}
-          restore-keys: |
-            ${{ runner.os }}-go-${{ matrix.go }}
+          go-version-file: go.mod
 
       - name: Running Tests
         run: make ci_tests
@@ -59,36 +46,32 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
 
       - name: Set up Go
-        uses: actions/setup-go@v6
+        uses: actions/setup-go@v7
         with:
-          go-version: "1.26.4"
+          go-version-file: go.mod
 
       - name: Check for go vulnerabilities
-        run: |
-          go install golang.org/x/vuln/cmd/govulncheck@latest
-          govulncheck ./...
+        run: go run golang.org/x/vuln/cmd/govulncheck@latest ./...
 
   lint:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
 
       - name: Set up Go
-        uses: actions/setup-go@v6
+        uses: actions/setup-go@v7
         with:
-          go-version: "1.26.4"
+          go-version-file: go.mod
 
-      - id: govulncheck
-        uses: golang/govulncheck-action@v1
-        with:
-          repo-checkout: 'false'
-          go-version-input: '1.26.4'
+      - name: Check formatting
+        run: test -z "$(go run mvdan.cc/gofumpt@latest -l .)"
 
       - name: golangci-lint
         uses: golangci/golangci-lint-action@v9
         with:
-          args: --timeout 5m0s
+          version: v2.15.0
+          args: --timeout 5m0s --concurrency=4
