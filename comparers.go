@@ -1,12 +1,13 @@
 package testament
 
 import (
+	cmp0 "cmp"
+
 	"github.com/google/go-cmp/cmp"
-	"golang.org/x/exp/constraints"
 	"golang.org/x/exp/slices"
 )
 
-func equal[T constraints.Ordered](a, b []T) bool {
+func equal[T cmp0.Ordered](a, b []T) bool {
 	if len(a) != len(b) {
 		return false
 	}

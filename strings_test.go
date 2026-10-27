@@ -84,7 +84,7 @@ func isValidEmail(email string) bool {
 func testStringRandomEmailAddress(t *testing.T) {
 	t.Parallel()
 	total := 100
-	for i := 0; i < total; i++ {
+	for range total {
 		got := testament.RandomEmailAddress()
 		assert.True(t, isValidEmail(got))
 	}
@@ -99,7 +99,7 @@ func isValidS3Filename(filename string) bool {
 func testStringRandomS3Filename(t *testing.T) {
 	t.Parallel()
 	total := 100
-	for i := 0; i < total; i++ {
+	for range total {
 		got := testament.RandomS3Filename()
 		assert.True(t, isValidS3Filename(got), got)
 	}

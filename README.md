@@ -2,7 +2,7 @@
 
 For all your testing needs.
 
-[![Build Status](https://github.com/blokur/testament/actions/workflows/go.yml/badge.svg?branch=master)](https://github.com/blokur/testament/actions/workflows/go.yml)
+[![Build Status](https://github.com/blokur/testament/actions/workflows/go.yml/badge.svg?branch=main)](https://github.com/blokur/testament/actions/workflows/go.yml)
 
 ![Testament](https://media.giphy.com/media/RScBAu4Y11IME/giphy.gif)
 
